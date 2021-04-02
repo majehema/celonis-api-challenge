@@ -2,7 +2,6 @@ package com.celonis.challenge.controllers;
 
 import com.celonis.challenge.services.JobService;
 import org.jobrunr.jobs.Job;
-import org.jobrunr.jobs.JobId;
 import org.jobrunr.jobs.context.JobContext;
 import org.jobrunr.jobs.states.StateName;
 import org.jobrunr.scheduling.JobScheduler;
@@ -16,8 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -28,10 +25,10 @@ public class JobController {
     private final JobService jobService;
 
     @Autowired
-    private JobScheduler jobScheduler;
+    private final JobScheduler jobScheduler;
 
     @Autowired
-    private BackgroundJobServer backgroundJobServer;
+    private final BackgroundJobServer backgroundJobServer;
 
     public JobController(JobService jobService, JobScheduler jobScheduler, BackgroundJobServer backgroundJobServer) {
         this.jobService = jobService;
@@ -44,8 +41,7 @@ public class JobController {
     public void runJob(@RequestParam(value = "x", required = false) Integer x,
                        @RequestParam(value = "y", required = false) Integer y) {
         if (x != null && y != null) {
-            String uuid = jobScheduler.enqueue(() -> jobService.counter(x, y, JobContext.Null)).toString();
-            System.out.println("jobId:" + uuid);
+            jobScheduler.enqueue(() -> jobService.counter(x, y, JobContext.Null)).toString();
         }
     }
 

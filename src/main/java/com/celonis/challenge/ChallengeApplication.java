@@ -15,6 +15,8 @@ import javax.sql.DataSource;
 
 @SpringBootApplication
 public class ChallengeApplication {
+    public static final String SAMPLE_PROJECT = "Generate sample project task";
+    public static final String COUNT_FROM_X_TO_Y = "Count from X to Y";
 
     public static void main(String[] args) {
         SpringApplication.run(ChallengeApplication.class, args);

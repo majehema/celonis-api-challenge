@@ -22,6 +22,9 @@ public class ProjectGenerationTask {
     @JsonIgnore
     private String storageLocation;
 
+    @JsonIgnore
+    private String jobId;
+
     public String getId() {
         return id;
     }
@@ -52,5 +55,13 @@ public class ProjectGenerationTask {
 
     public void setStorageLocation(String storageLocation) {
         this.storageLocation = storageLocation;
+    }
+
+    public String getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(String jobId) {
+        this.jobId = jobId;
     }
 }

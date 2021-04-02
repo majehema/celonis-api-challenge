@@ -1,6 +1,5 @@
 package com.celonis.challenge.services;
 
-import org.jobrunr.jobs.JobId;
 import org.jobrunr.jobs.annotations.Job;
 import org.jobrunr.jobs.context.JobContext;
 import org.slf4j.Logger;
@@ -47,7 +46,7 @@ public class JobService {
             for (int i = x; i<= y; i++){
                 Thread.sleep(1000);
                 progressBar.increaseByOne();
-                jobLogger.info(String.valueOf(i));
+                jobLogger.info("We are currently at number " + i +"/" + y);
             }
             logger.info("Job with parameters " + x + " and " + y + " finished");
         } catch (InterruptedException e) {
@@ -58,4 +57,5 @@ public class JobService {
             }
         }
     }
+
 }

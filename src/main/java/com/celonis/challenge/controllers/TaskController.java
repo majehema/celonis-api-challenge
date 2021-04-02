@@ -1,17 +1,17 @@
 package com.celonis.challenge.controllers;
 
 import com.celonis.challenge.model.ProjectGenerationTask;
+import com.celonis.challenge.model.ProjectGenerationTaskRepository;
 import com.celonis.challenge.services.FileService;
 import com.celonis.challenge.services.JobService;
 import com.celonis.challenge.services.TaskService;
-import org.jobrunr.jobs.JobId;
-import org.jobrunr.jobs.annotations.Job;
+import org.jobrunr.jobs.context.JobContext;
+import org.jobrunr.scheduling.JobScheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.jobrunr.scheduling.JobScheduler;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -24,10 +24,22 @@ public class TaskController {
 
     private final FileService fileService;
 
+    @Autowired
+    private final JobService jobService;
+
+    @Autowired
+    private final JobScheduler jobScheduler;
+
+    private final ProjectGenerationTaskRepository projectGenerationTaskRepository;
+
+
     public TaskController(TaskService taskService,
-                          FileService fileService) {
+                          FileService fileService, JobService jobService, JobScheduler jobScheduler, ProjectGenerationTaskRepository projectGenerationTaskRepository) {
         this.taskService = taskService;
         this.fileService = fileService;
+        this.jobService = jobService;
+        this.jobScheduler = jobScheduler;
+        this.projectGenerationTaskRepository = projectGenerationTaskRepository;
     }
 
     @GetMapping("/")
@@ -59,8 +71,19 @@ public class TaskController {
 
     @PostMapping("/{taskId}/execute")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void executeTask(@PathVariable String taskId) {
-        taskService.executeTask(taskId);
+    public void executeTask(@PathVariable String taskId,
+                            @RequestParam(value = "x", required = false) Integer x,
+                            @RequestParam(value = "y", required = false) Integer y) {
+        if (x != null && y != null) {
+            String uuid = jobScheduler.enqueue(() -> jobService.counter(x, y, JobContext.Null)).toString();
+
+            ProjectGenerationTask projectGenerationTask = taskService.getTask(taskId);
+            projectGenerationTask.setJobId(uuid);
+            projectGenerationTaskRepository.save(projectGenerationTask);
+
+        } else {
+            taskService.executeTask(taskId);
+        }
     }
 
     @GetMapping("/{taskId}/result")
