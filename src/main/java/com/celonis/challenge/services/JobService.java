@@ -1,6 +1,6 @@
 package com.celonis.challenge.services;
 
-import com.celonis.challenge.model.ProjectGenerationTask;
+import org.jobrunr.jobs.JobId;
 import org.jobrunr.jobs.annotations.Job;
 import org.jobrunr.jobs.context.JobContext;
 import org.slf4j.Logger;
@@ -14,6 +14,7 @@ import org.jobrunr.storage.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class JobService {
@@ -27,11 +28,13 @@ public class JobService {
         this.backgroundJobServer = backgroundJobServer;
     }
 
-    public List<org.jobrunr.jobs.Job> listJobs() {
-        List<org.jobrunr.jobs.Job> jobs = backgroundJobServer.getStorageProvider()
-                .getJobs(StateName.PROCESSING, PageRequest.ascOnUpdatedAt(5));
-        System.out.println("*******" + jobs);
-        return jobs;
+    public List<org.jobrunr.jobs.Job> listJobs(StateName state) {
+        return backgroundJobServer.getStorageProvider()
+                .getJobs(state, PageRequest.ascOnUpdatedAt(5));
+    }
+
+    public org.jobrunr.jobs.Job job(UUID jobId) {
+        return backgroundJobServer.getStorageProvider().getJobById(jobId);
     }
 
     @Job(name = "Job with parameters %0 and %1")
