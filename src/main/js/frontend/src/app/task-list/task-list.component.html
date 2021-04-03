@@ -1,0 +1,17 @@
+<div class="card my-5">
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let task of tasks" routerLink="/addtask" href="#">
+        <td>{{ task.name }}<br>
+          <div class="text-primary">
+            <div *ngIf="task.storageLocation || task.jobId; else elseBlock">Task finished</div>
+            <ng-template #elseBlock >Task not executed</ng-template>
+          </div>
+        </td>
+        <td>{{ task.id }}</td>
+        <td>{{ task.jobId }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
