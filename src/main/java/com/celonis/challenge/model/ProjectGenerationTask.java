@@ -22,7 +22,6 @@ public class ProjectGenerationTask {
     @JsonIgnore
     private String storageLocation;
 
-    @JsonIgnore
     private String jobId;
 
     public String getId() {

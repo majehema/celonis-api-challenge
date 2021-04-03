@@ -1,0 +1,14 @@
+com\celonis\challenge\ChallengeApplication.class
+com\celonis\challenge\security\SimpleHeaderFilter.class
+com\celonis\challenge\controllers\JobController.class
+com\celonis\challenge\exceptions\NotAuthorizedException.class
+com\celonis\challenge\services\FileService.class
+com\celonis\challenge\model\ProjectGenerationTask.class
+com\celonis\challenge\services\JobService.class
+com\celonis\challenge\security\CorsConfiguration.class
+com\celonis\challenge\model\ProjectGenerationTaskRepository.class
+com\celonis\challenge\services\TaskService.class
+com\celonis\challenge\controllers\ErrorController.class
+com\celonis\challenge\exceptions\NotFoundException.class
+com\celonis\challenge\exceptions\InternalException.class
+com\celonis\challenge\controllers\TaskController.class
