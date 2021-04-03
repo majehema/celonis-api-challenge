@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="challenge-java-broken" target="14" />
+      <module name="challenge-java-broken" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

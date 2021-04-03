@@ -36,12 +36,12 @@ public class JobController {
         this.backgroundJobServer = backgroundJobServer;
     }
 
-    @GetMapping("/count")
+    @PostMapping("/count")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void runJob(@RequestParam(value = "x", required = false) Integer x,
                        @RequestParam(value = "y", required = false) Integer y) {
         if (x != null && y != null) {
-            jobScheduler.enqueue(() -> jobService.counter(x, y, JobContext.Null)).toString();
+            jobScheduler.enqueue(() -> jobService.counter(x, y, JobContext.Null));
         }
     }
 
@@ -89,7 +89,7 @@ public class JobController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
-    @GetMapping("/{jobId}/cancel")
+    @PostMapping("/{jobId}/cancel")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void cancelJob(@PathVariable UUID jobId){
         jobScheduler.delete(jobId);

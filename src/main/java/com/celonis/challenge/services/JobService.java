@@ -18,10 +18,10 @@ import java.util.UUID;
 @Service
 public class JobService {
 
-    public Logger logger = LoggerFactory.getLogger(getClass());
+    public final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private BackgroundJobServer backgroundJobServer;
+    private final BackgroundJobServer backgroundJobServer;
 
     public JobService(BackgroundJobServer backgroundJobServer) {
         this.backgroundJobServer = backgroundJobServer;
