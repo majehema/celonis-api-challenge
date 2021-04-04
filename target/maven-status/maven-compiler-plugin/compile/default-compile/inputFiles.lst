@@ -1,5 +1,6 @@
 D:\Documents\Coding challenges para entrevistas\Backend _ Fullstack\application\src\main\java\com\celonis\challenge\controllers\ErrorController.java
 D:\Documents\Coding challenges para entrevistas\Backend _ Fullstack\application\src\main\java\com\celonis\challenge\services\JobService.java
+D:\Documents\Coding challenges para entrevistas\Backend _ Fullstack\application\src\main\java\com\celonis\challenge\configuration\JobConfiguration.java
 D:\Documents\Coding challenges para entrevistas\Backend _ Fullstack\application\src\main\java\com\celonis\challenge\services\FileService.java
 D:\Documents\Coding challenges para entrevistas\Backend _ Fullstack\application\src\main\java\com\celonis\challenge\controllers\TaskController.java
 D:\Documents\Coding challenges para entrevistas\Backend _ Fullstack\application\src\main\java\com\celonis\challenge\security\CorsConfiguration.java
