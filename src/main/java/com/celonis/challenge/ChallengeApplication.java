@@ -1,14 +1,13 @@
 package com.celonis.challenge;
 
-import org.jobrunr.jobs.mappers.JobMapper;
-import org.jobrunr.storage.InMemoryStorageProvider;
-import org.jobrunr.storage.StorageProvider;
+import com.celonis.challenge.configuration.JobConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 
 
 @SpringBootApplication
+@Import(JobConfiguration.class)
 public class ChallengeApplication {
     public static final String SAMPLE_PROJECT = "Generate sample project task";
     public static final String COUNT_FROM_X_TO_Y = "Count from X to Y";
@@ -17,10 +16,4 @@ public class ChallengeApplication {
         SpringApplication.run(ChallengeApplication.class, args);
     }
 
-    @Bean
-    public StorageProvider storageProvider(JobMapper jobMapper) {
-        InMemoryStorageProvider storageProvider = new InMemoryStorageProvider();
-        storageProvider.setJobMapper(jobMapper);
-        return storageProvider;
-    }
 }

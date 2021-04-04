@@ -4,7 +4,7 @@
     <module name="challenge-java-broken" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.celonis.challenge.*" />
+        <option name="PATTERN" value="com.celonis.challenge.configuration.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
