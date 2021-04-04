@@ -1,0 +1,4 @@
+/target/
+/src/main/js/frontend/node/
+/src/main/js/frontend/node_modules/
+/src/main/js/frontend/dist
